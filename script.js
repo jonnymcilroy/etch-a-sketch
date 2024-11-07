@@ -1,7 +1,8 @@
-// create grid squares
-let numOfSquares = 100;
 
-function createSquare(numOfSquares) {
+let numOfSquares = 16;
+let isMouseDown = false;
+
+function createSquares(numOfSquares) {
     const gridLength = 500;
     const squaresInGrid = numOfSquares * numOfSquares;
     const squareLength = (gridLength / numOfSquares) - 2;
@@ -14,25 +15,46 @@ function createSquare(numOfSquares) {
         square.style.width = `${squareLength}px`;
         square.style.height = `${squareLength}px`;
         square.style.borderRadius = "2px";
-
+        square.addEventListener("mouseover", colorSquare);
         grid.appendChild(square);
     }
 };
-// initialise squares
-createSquare(numOfSquares);
 
-const squares = document.querySelectorAll(".square");
+function colorSquare(event) {
+    if (isMouseDown) {
+        event.target.style.backgroundColor = "black";
+    }
+}
 
-let isMouseDown = false;
+function initialiseMouseTracking() {
+    document.addEventListener("mousedown", () => isMouseDown = true);
+    document.addEventListener("mouseup", () => isMouseDown = false);
+}
 
-document.addEventListener("mousedown", () => isMouseDown = true);
-document.addEventListener("mouseup", () => isMouseDown = false);
+// initialise squares and tracking
+createSquares(numOfSquares);
+initialiseMouseTracking();
 
-squares.forEach(square => {
-    square.addEventListener("mouseover", () => {
-        if (isMouseDown) {
-            square.style.backgroundColor = "black";
-        }
+function deleteSquares() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => {
+        square.remove();
 
     });
+
+}
+
+const setSquaresBtn = document.querySelector(".set-squares-btn");
+
+setSquaresBtn.addEventListener("click", () => {
+    let input;
+    while (true) {
+        input = prompt("Change number of squares per row. Enter a number 1-100");
+        if (input !== null && !isNaN(input) && input >= 1 && input <= 100) {
+            break;
+        }
+        alert("Please enter a number 1-100 only")
+    }
+    deleteSquares();
+    createSquares(input);
 });
