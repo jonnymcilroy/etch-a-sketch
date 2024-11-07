@@ -1,9 +1,29 @@
-.grid {
-    margin: 30px;
+body {
+    height: 98vh;
     display: flex;
-    border: 1px solid black;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header,
+.footer {
+    text-align: center;
+}
+
+.header {
+    margin-top: 4px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.grid {
+    display: flex;
+    border: 1px solid rgb(165, 165, 165);
     width: 500px;
     height: 500px;
     flex-wrap: wrap;
-
+    flex-shrink: 0;
+    border-radius: 2px;
 }

@@ -9,12 +9,14 @@ function createSquare(numOfSquares) {
     const grid = document.querySelector(".grid");
     for (let i = 1; i <= squaresInGrid; i++) {
         const square = document.createElement("div");
-        square.style.border = "1px solid red";
+        square.style.border = "1px solid rgb(165, 165, 165)";
         square.style.width = `${squareLength}px`;
         square.style.height = `${squareLength}px`;
+        square.style.borderRadius = "2px";
 
         grid.appendChild(square);
     }
 };
-
+// initialise squares
 createSquare(numOfSquares);
+
