@@ -42,12 +42,13 @@ function deleteSquares() {
 
     });
 
-}
+};
 
+// change number of squares per line of grid
 const setSquaresBtn = document.querySelector(".set-squares-btn");
-
+let input;
 setSquaresBtn.addEventListener("click", () => {
-    let input;
+
     while (true) {
         input = prompt("Change number of squares per row. Enter a number 1-100");
         if (input !== null && !isNaN(input) && input >= 1 && input <= 100) {
@@ -57,4 +58,16 @@ setSquaresBtn.addEventListener("click", () => {
     }
     deleteSquares();
     createSquares(input);
+});
+
+//reset grid
+const resetBtn = document.querySelector(".reset-btn");
+
+resetBtn.addEventListener("click", () => {
+    deleteSquares();
+    if (input !== null && !isNaN(input)) {
+        createSquares(input);
+    } else {
+        createSquares(numOfSquares);
+    }
 });
