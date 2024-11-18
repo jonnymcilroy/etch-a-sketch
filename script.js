@@ -1,9 +1,10 @@
 
 let numOfSquares = 16;
 let isMouseDown = false;
+let isRainbowMode = false;
 
 function createSquares(numOfSquares) {
-    const gridLength = 500;
+    const gridLength = 550;
     const squaresInGrid = numOfSquares * numOfSquares;
     const squareLength = (gridLength / numOfSquares) - 2;
     console.log(squareLength);
@@ -11,10 +12,11 @@ function createSquares(numOfSquares) {
     for (let i = 1; i <= squaresInGrid; i++) {
         const square = document.createElement("div");
         square.classList.add("square");
-        square.style.border = "1px solid rgb(165, 165, 165)";
+        square.style.border = "1px solid rgb(230, 230, 230)";
         square.style.width = `${squareLength}px`;
         square.style.height = `${squareLength}px`;
-        square.style.borderRadius = "2px";
+        //square.style.borderRadius = "2px";
+        square.style.backgroundColor = "white";
         square.addEventListener("mouseover", colorSquare);
         grid.appendChild(square);
     }
@@ -22,9 +24,22 @@ function createSquares(numOfSquares) {
 
 function colorSquare(event) {
     if (isMouseDown) {
-        event.target.style.backgroundColor = "black";
+        if (isRainbowMode) {
+            event.target.style.backgroundColor = generateRandomColor();
+        } else {
+            event.target.style.backgroundColor = "black";
+        }
+
     }
 }
+
+const rainbowBtn = document.querySelector(".rainbow-mode");
+rainbowBtn.addEventListener("click", () => {
+    isRainbowMode = !isRainbowMode; // Toggle rainbow mode
+    rainbowBtn.textContent = isRainbowMode ? "Rainbow Mode ON" : "Rainbow Mode OFF";
+
+})
+
 
 function initialiseMouseTracking() {
     document.addEventListener("mousedown", () => isMouseDown = true);
@@ -71,3 +86,12 @@ resetBtn.addEventListener("click", () => {
         createSquares(numOfSquares);
     }
 });
+
+//generate random colour for square
+function generateRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
