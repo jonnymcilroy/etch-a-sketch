@@ -11,7 +11,7 @@ function createSquares(numOfSquares) {
     for (let i = 1; i <= squaresInGrid; i++) {
         const square = document.createElement("div");
         square.classList.add("square");
-        square.style.border = "1px solid rgb(230, 230, 230)";
+        square.style.border = "1px solid rgb(245, 250, 250)";
         square.style.width = `${squareLength}px`;
         square.style.height = `${squareLength}px`;
         square.style.backgroundColor = "white";
